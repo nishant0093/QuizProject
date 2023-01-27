@@ -5,12 +5,12 @@ import java.sql.DriverManager;
 
 public class NewConnection {
 	
-	Connection conn = null;
+	static Connection conn  = null;
 	
 	public Connection newConnection() {
 		try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/users","root","root");}
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/users","root","Root");}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
