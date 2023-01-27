@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,13 +14,14 @@ import java.util.Set;
 
 public class Questions {
 	Scanner scan = new Scanner(System.in);
-	static HashMap<String, Character> map = new HashMap<String, Character>();
+	
 	NewConnection connect = new NewConnection();
 	Connection con = null;
 	PreparedStatement ps =null;
 
 	public void demo() {
-		HashSet set1 = new HashSet();
+		int count=0;
+		HashSet<String> set1 = new HashSet<String> ();
 		System.out.println("To take the quiz test enter your username");
 		String ans1 = scan.next();
 		try {
@@ -36,58 +38,96 @@ public class Questions {
 		
 	}
 		
+		
 		if(set1.contains(ans1)) {
 		
-		int count = 0;
-		
-		String q1= "Which nation has won the most FiFa World Cups"+ "\nA. Italy"+"\nB. Germany"+"\nC. Argentina"+"\nD. Brazil";
-		String q2= "In what year did world war II start"+ "\nA. 1938"+  "\nB. 1945"+  "\nC. 1914"+ "\nD. 1918";
-		String q3= "How many times did India win the ICC World cup"+"\nA. 2"+"\nB. 5"+"\nC. 3"+"\nD. 1";
-		String q4= "Which country won the FIFA World cup in 2010"+"\nA. Germany"+"\nB. Spain"+"\nC. Italy"+"\nD. Brazil";
-		
-		map.put(q1, 'D');
-		map.put(q2, 'A');
-		map.put(q3, 'A');
-		map.put(q4, 'B');
-		
-		Set<String> set= map.keySet();
-		Iterator<String> itr = set.iterator();
-		while(itr.hasNext()) {
-			String q = itr.next();
-			System.out.println(q);
-			System.out.println("Choose your answer");
-			char ans = scan.next().toUpperCase().charAt(0);
-			if(ans==map.get(q)){
-				count++;
-						
-			}
-//		System.out.println("Your score is: "+count);
-		
-	}
-		try {
-			con = connect.newConnection();
-			ps = con.prepareStatement("update user set score = ? where username = ?");
-			ps.setInt(1, count);
-			ps.setString(2,ans1);
-			ps.execute();
-			ps = con.prepareStatement("select score from user where username = ?");
-			ps.setString(1, ans1);
-			ps.execute();
-			ResultSet rs  = ps.executeQuery();
-			while(rs.next()) {
-				System.out.println("Your score is: "+rs.getInt(1));
-			}
+			final ArrayList<Character> list = new ArrayList<Character>();
+			Scanner scan = new Scanner(System.in);
 			
-		}catch(Exception e	) {
-			e.printStackTrace();
-		
-	}
-		}
-		else {
-			System.out.println("Username doesn't match");
-		}
+			
+			String[] que = {"Which nation has won the most FiFa World Cups ?",
+					"In what year did world war II start ?", 
+					"How many times did India win the ICC World cup ?",
+					"Which country won the FIFA World cup in 2010 ?",
+					"Which country was host nation for 2012 OLYMPICS ?",
+					"Real Madrid a Spanish football club was founded in?",
+					"Which French player holds the record for most goal scored for country ?",
+					"Which sports band sponsored the 'Brazuca' football at the 2014 world cup ?",
+					"First ICC T20 world cup played in which country ?",
+					"Which country lost 2004 Euro final ?"
+					};
+			
+			String[][] options = {
+					
+					{"Italy","Germany","Argentina", "Brazil"},
+					{ "1939", "1945", "1914", "1918"},
+					{"2","5","3","1"},
+					{"Germany","Spain","Italy", "Brazil"},
+					{"England","Spain","Italy", "Brazil"},
+					{ "1898", "1902", "1914", "1950"},
+					{"Zinedine Zidane", "Oliver Giroud", "Antoine Griezmann","Thierry Henry"},
+					{"Puma","Nike","Adidas","New Balance"},
+					{"South Africa","Australia","India","England"},
+					{"Greece","Portugal","Germany","France"}
+					
+			};
+			
+			String[] button = {"A. ","B. ","C. ","D. "};
+			
+			list.add(0, 'D');
+			list.add(1, 'A');
+			list.add(2, 'A');
+			list.add(3, 'B');
+			list.add(4, 'A');
+			list.add(5, 'B');
+			list.add(6, 'B');
+			list.add(7, 'C');
+			list.add(8, 'A');
+			list.add(9, 'B');
+			
+
+			
+			for(int i=0; i<que.length;i++) {
+				System.out.println(que[i]);
+				for(int j=0; j<4;j++) {
+				
+				System.out.print(button[j]);
+				System.out.println(options[i][j]);}
+				System.out.println("\nChoose your answer");
+				char input = scan.next().toUpperCase().charAt(0);
+				
+					if(list.get(i)==input) {
+						count++;
+						}
+					}
+			
+			scan.close();		
+			
+			try {
+				con = connect.newConnection();
+				ps = con.prepareStatement("update user set score = ? where username = ?");
+				ps.setInt(1, count);
+				ps.setString(2,ans1);
+				ps.execute();
+				ps = con.prepareStatement("select score from user where username = ?");
+				ps.setString(1, ans1);
+				ps.execute();
+				ResultSet rs  = ps.executeQuery();
+				while(rs.next()) {
+					System.out.println("Your score is: "+rs.getInt(1));
+				}
+				
+			}catch(Exception e	) {
+				e.printStackTrace();
+			
+					}
 		}
 	
+		else {
+			System.out.println("Username doesn't match");}
+		
+		}
+
 		
 		
 	
