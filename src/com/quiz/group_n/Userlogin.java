@@ -17,14 +17,14 @@ public class Userlogin {
 	}
 	public void userInfo() {
 		
-		System.out.println("Enter name: ");
+		System.out.println("Enter your full name: ");
         String name = scan.nextLine();
         System.out.println("Enter username: ");
         String username = scan.next();
         
         try {
       conn =con.newConnection();
-      ps = conn.prepareStatement("insert into user (name , username) values (?, ?)" );
+      ps = conn.prepareStatement("insert into user (full_name , username) values (?, ?)" );
       ps.setString(1 , name);
       ps.setString(2 , username);
      ps.execute();
