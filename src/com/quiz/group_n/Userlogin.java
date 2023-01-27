@@ -24,7 +24,7 @@ public class Userlogin {
         
         try {
       conn =con.newConnection();
-      ps = conn.prepareStatement("insert into user (name , username) values (?, ?)" );
+      ps = conn.prepareStatement("insert into user (full_name , username) values (?, ?)" );
       ps.setString(1 , name);
       ps.setString(2 , username);
      ps.execute();
