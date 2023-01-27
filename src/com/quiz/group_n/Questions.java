@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
@@ -18,6 +19,25 @@ public class Questions {
 	PreparedStatement ps =null;
 
 	public void demo() {
+		HashSet set1 = new HashSet();
+		System.out.println("To take the quiz test enter your username");
+		String ans1 = scan.next();
+		try {
+			con = connect.newConnection();
+			ps = con.prepareStatement("select username from user");
+			ps.execute();
+			ResultSet rs  = ps.executeQuery();
+			while(rs.next()) {
+				set1.add(rs.getString(1));
+			}
+			
+		}catch(Exception e	) {
+			e.printStackTrace();
+		
+	}
+		
+		if(set1.contains(ans1)) {
+		
 		int count = 0;
 		
 		String q1= "Which nation has won the most FiFa World Cups"+ "\nA. Italy"+"\nB. Germany"+"\nC. Argentina"+"\nD. Brazil";
@@ -46,15 +66,16 @@ public class Questions {
 	}
 		try {
 			con = connect.newConnection();
-			ps = con.prepareStatement("update user set score = ? where id = ?");
+			ps = con.prepareStatement("update user set score = ? where username = ?");
 			ps.setInt(1, count);
-			ps.setInt(2,1);
+			ps.setString(2,ans1);
 			ps.execute();
-			ps = con.prepareStatement("select * from user where id = 1");
+			ps = con.prepareStatement("select score from user where username = ?");
+			ps.setString(1, ans1);
 			ps.execute();
 			ResultSet rs  = ps.executeQuery();
 			while(rs.next()) {
-				System.out.println("Your score is: "+rs.getInt(5));
+				System.out.println("Your score is: "+rs.getInt(1));
 			}
 			
 		}catch(Exception e	) {
@@ -62,6 +83,13 @@ public class Questions {
 		
 	}
 		}
+		else {
+			System.out.println("Username doesn't match");
+		}
+		}
+	
+		
+		
 	
 	
 	public static void main(String[] args) {
