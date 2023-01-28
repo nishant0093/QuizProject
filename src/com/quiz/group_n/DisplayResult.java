@@ -26,8 +26,8 @@ public class DisplayResult {
 		    ResultSet rs=ps.executeQuery();
 		    while(rs.next())
 		    {
-		    set1.add(rs.getInt(1));
-		    System.out.println(set1);
+		    set1.add(rs.getString(1));
+		    
 		    }
 		
 		    
