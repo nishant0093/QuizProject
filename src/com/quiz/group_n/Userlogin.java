@@ -12,12 +12,22 @@ public class Userlogin {
 	
 	public void userInfo() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		System.out.println("Enter your full name: ");
 =======
 		System.out.println("To create new username enter the details: \n");
 		System.out.println("Enter name: ");
 >>>>>>> Q1
+=======
+
+		System.out.println("To create new username enter the details: \n");
+		System.out.println("Enter name: ");
+
+		
+		System.out.println("Enter your full name: ");
+
+>>>>>>> 5a598a93d0e49eb3c82a5e1332d7a4650538eab3
         String name = scan.nextLine();
         System.out.println("Enter username: ");
         String username = scan.next();
