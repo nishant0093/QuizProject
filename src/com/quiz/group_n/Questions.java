@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Questions {
+public class Questions extends DisplayResult{
 	static Scanner scan = new Scanner(System.in);
 	
 	NewConnection connect = new NewConnection();
@@ -102,7 +102,7 @@ public class Questions {
 						}
 					}
 			
-			scan.close();		
+			
 			
 			try {
 				con = connect.newConnection();
@@ -128,27 +128,31 @@ public class Questions {
 			System.out.println("Username doesn't match");}
 		
 		}
-
+	public void run() {
 		
-		
-	
-	
-	public static void main(String[] args) {
-		Questions quiz = new Questions();
 		Userlogin log = new Userlogin();
+		
 		
 		System.out.println("Have you created username already");
 		
 		char input= scan.next().toLowerCase().charAt(0);
 		
 		if(input == 'y') {
-		quiz.takeQuiz();		
+		takeQuiz();		
 		}
 		else {
 		log.userInfo();
 		
-		quiz.takeQuiz();}
+		takeQuiz(); }
 		
+		super.display();
+		
+	}
+		
+		
+	public static void main(String[] args) {
+		Questions quiz = new Questions();
+		quiz.run();		
 	}	
 	
 	}

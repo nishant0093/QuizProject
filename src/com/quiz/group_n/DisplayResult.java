@@ -10,12 +10,14 @@ import java.util.Scanner;
 
 public class DisplayResult {
 	
+	
 	 NewConnection ns=new NewConnection();
 	 Connection con=null;
 	 PreparedStatement ps =null;
-	 Scanner scan = new Scanner(System.in);
+	 static Scanner scan = new Scanner(System.in);
 	 HashSet set1 = new HashSet();
-	 
+	 static int in;
+	 static int n;
 	public void getResult() {
 		
 		
@@ -27,14 +29,14 @@ public class DisplayResult {
 		    while(rs.next())
 		    {
 		    set1.add(rs.getString(1));
-		    
+		
 		    }
 		
 		    
 		System.out.println("To check your score press 1:"); 
 		System.out.println("To check the score all students in descending order press 2:");
 		System.out.println("To check the score all students in ascending order press 3:");
-		int n = scan.nextInt();
+		n = scan.nextInt();
 		
 		switch(n) {
 		case 1:
@@ -118,6 +120,7 @@ public class DisplayResult {
 		}
 	}
 	public void ascSortedResult() {
+
 		try {
 			con =ns.newConnection();
 		    ps = con.prepareStatement("select * from user order by score asc");
@@ -136,15 +139,18 @@ public class DisplayResult {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public static void main(String[] args) {
-		
-		DisplayResult res=new DisplayResult();
-		res.getResult();
-		
-		
 
+	public void display() {
+		
+		System.out.println("If you want to see the other results press 1 or press No");
+		in = scan.nextInt();
+		
+		if(in ==1) {
+			getResult();
+		}
+		else {
+			System.out.println("Ok then, BYE BYE");
+		}
+		scan.close();
 	}
-
 }
