@@ -18,10 +18,11 @@ public class Questions {
 	NewConnection connect = new NewConnection();
 	Connection con = null;
 	PreparedStatement ps = null;
-
+	static HashSet<String> set1 = new HashSet<String> ();
+	
 	public void takeQuiz() {
 		int count=0;
-		HashSet<String> set1 = new HashSet<String> ();
+		
 		System.out.println("To take the quiz test enter your username");
 		String ans1 = scan.next();
 		try {
@@ -114,7 +115,7 @@ public class Questions {
 				ps.execute();
 				ResultSet rs  = ps.executeQuery();
 				while(rs.next()) {
-					System.out.println("Your score is: "+rs.getInt(1)+"out of 10");
+					System.out.println("Your score is: "+rs.getInt(1)+" out of 10");
 				}
 				
 			}catch(Exception e	) {
