@@ -13,13 +13,13 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Questions {
-	Scanner scan = new Scanner(System.in);
+	static Scanner scan = new Scanner(System.in);
 	
 	NewConnection connect = new NewConnection();
 	Connection con = null;
-	PreparedStatement ps =null;
+	PreparedStatement ps = null;
 
-	public void demo() {
+	public void takeQuiz() {
 		int count=0;
 		HashSet<String> set1 = new HashSet<String> ();
 		System.out.println("To take the quiz test enter your username");
@@ -134,7 +134,20 @@ public class Questions {
 	
 	public static void main(String[] args) {
 		Questions quiz = new Questions();
-		quiz.demo();		
+		Userlogin log = new Userlogin();
+		
+		System.out.println("Have you created username already");
+		
+		char input= scan.next().toLowerCase().charAt(0);
+		
+		if(input == 'y') {
+		quiz.takeQuiz();		
+		}
+		else {
+		log.userInfo();
+		
+		quiz.takeQuiz();}
+		
 	}	
 	
 	}
