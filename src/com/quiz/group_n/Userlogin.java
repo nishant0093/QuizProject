@@ -12,15 +12,10 @@ public class Userlogin {
 	
 	public void userInfo() {
 
-	
 		System.out.println("To create new username enter the details: \n");
-		System.out.println("Enter name: ");
-
-		
 		System.out.println("Enter your full name: ");
+		String name = scan.nextLine();
 
-
-        String name = scan.nextLine();
         System.out.println("Enter username: ");
         String username = scan.next();
         
